@@ -1,0 +1,14 @@
+image: node:latest
+
+cache:
+  paths:
+  - node_modules/
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+  - npm install
+  - npm run-script heroku-postbuild

@@ -10,5 +10,7 @@ stages:
 deploy:
   stage: deploy
   script:
-  - npm install
+  - npm install -g npm-check-updates
+  - ncu -u
+  - npm install --save
   - npm run-script heroku-postbuild

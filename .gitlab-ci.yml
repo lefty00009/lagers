@@ -10,8 +10,8 @@ stages:
 deploy:
   stage: deploy
   script:
-  - node update
   - npm i -g npm-check-updates to update
   - npm audit fix
   - ncu -u
   - npm install --save
+  - npm run heroku-postbuild

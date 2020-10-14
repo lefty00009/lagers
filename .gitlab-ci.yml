@@ -11,6 +11,7 @@ deploy:
   stage: deploy
   script:
   - npm i -g npm-check-updates to update
+  - npm i --package-lock-only
   - npm audit fix
   - ncu -u
   - npm install --save

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^7.0.0-beta.1",
     "axios": "^0.19.2",
     "http-proxy-middleware": "^0.20.0",
     "materialize-css": "^1.0.0",

@@ -7,6 +7,8 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
+
+
 passport.serializeUser((user, done) => {
 	done(null, user.id);
 } );
@@ -17,6 +19,12 @@ passport.deserializeUser((id, done) => {
 		done(null,user);
 	});
 });
+
+console.log('DEBUG keys.googleClientID:', !!keys.googleClientID);
+console.log('DEBUG keys.googleClientSecret:', !!keys.googleClientSecret);
+
+
+if (keys.googleClientID && keys.googleClientSecret) {
 
 //use the passport api to authenticate a user against google oauth 2.0
 passport.use(
@@ -38,3 +46,7 @@ passport.use(
 				}
 		)
 );
+
+} else {
+  console.warn('Google OAuth disabled: missing googleClientID/googleClientSecret');
+}

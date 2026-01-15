@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -10,7 +11,14 @@ require('./models/survey');
 require('./services/passport');
 
 
-mongoose.connect(keys.mongoURI);
+console.log('DEBUG keys.mongoURI:', keys.mongoURI);
+if (keys.mongoURI) {
+  mongoose.connect(keys.mongoURI)
+    .then(() => console.log('Mongo connected'))
+    .catch(err => console.error('Mongo connection error', err));
+} else {
+  console.warn('Mongo disabled: missing mongoURI');
+}
 
 const app = express();
 

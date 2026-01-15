@@ -1,6 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "engines": {
@@ -8,9 +9,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "npm ci --prefix client && npm run build --prefix client",
+    "build": "npm install --prefix client && npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon index.js",
+    "server": "NODE_ENV=development nodemon index.js",
     "client": "npm run start --prefix client",
     "debug": "node debug index.js",
     "test": "node specs/start.js",
@@ -21,8 +22,6 @@
     "type": "git",
     "url": "https://git.homebrews.us/lagers/survey-app"
   },
-  "author": "Jason Roberts",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^2.2.2",
     "cookie-session": "^2.1.1",
@@ -35,10 +34,6 @@
     "sendgrid": "^5.2.3",
     "sparkpost": "^2.1.4",
     "stripe": "^20.1.2"
-  },
-  "volta": {
-    "node": "18.20.8",
-    "npm": "10.9.4"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

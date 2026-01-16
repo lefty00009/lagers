@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
@@ -22,22 +22,16 @@ if (keys.mongoURI) {
 
 const app = express();
 
-app.set('trust proxy', 1);  //good for Render + secure cookies
-
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use(session({
-  secret: keys.cookieKey,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-  }
-}));
 
+app.use(
+		cookieSession({
+			maxAge: 30 * 24 * 60 * 60 * 1000,
+			keys: [keys.cookieKey]
+		})
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
